@@ -30,6 +30,8 @@ jobs:
         uses: ben-z/gh-action-mutex@v1.0-alpha-7
       - run: |
           echo "I am protected!"
+          git config --global user.email "lepetitg+bot@gmail.com"
+          git config --global user.name "Greg Bot Sadetsky"
           git pull
           git add .
           git commit -m "add log"
