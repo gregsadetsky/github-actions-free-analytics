@@ -9,8 +9,9 @@ jobs:
   logjob:
     runs-on: ubuntu-latest
     steps:
-      - name: log
-        uses: actions/github-script@v3
+      - uses: actions/checkout@v3
+      - run: npm install uuid
+      - uses: actions/github-script@v3
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         with:
