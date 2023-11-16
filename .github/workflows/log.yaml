@@ -1,6 +1,5 @@
 name: 'log'
 run-name: 'logrun'
-description: 'logs web visits'
 on:
   workflow_dispatch:
     inputs:
