@@ -30,7 +30,9 @@ jobs:
         uses: ben-z/gh-action-mutex@v1.0-alpha-7
       - run: |
           echo "I am protected!"
-          sleep 5
+          git pull
+          git add .
+          git commit -m "add log"
 
       # - uses: stefanzweifel/git-auto-commit-action@v4
       #   with:
