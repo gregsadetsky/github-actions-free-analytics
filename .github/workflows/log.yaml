@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+          cache: 'npm'
           cache-dependency-path: '.logs'
       - run: npm install uuid
       - uses: actions/github-script@v7
