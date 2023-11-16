@@ -1,0 +1,40 @@
+name: 'log'
+run-name: 'logrun'
+description: 'logs web visits'
+on:
+  workflow_dispatch:
+    inputs:
+      incomingRequest:
+        description: "request payload"
+jobs:
+  logjob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: log
+        uses: actions/github-script@v3
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // writes the incomingRequest payload
+            // content to a new file in the repo named
+            // using uuid, then commits the repo and
+            // pushes the commit
+            const fs = require('fs');
+            const { v4: uuidv4 } = require('uuid');
+            const uuid = uuidv4();
+            const filename = `${uuid}.json`;
+            const path = `./${filename}`;
+            // write the payload to the file
+            const githubContext = JSON.parse(process.env.GITHUB_CONTEXT);
+            const incomingRequest = githubContext.event.inputs.incomingRequest;
+            console.log("incomingRequest", incomingRequest);
+            fs.writeFileSync(path, incomingRequest);
+            ```
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[add log]"
+          commit_user_name: Bot McBotface
+          commit_user_email: lepetitg+bot@gmail.com
+          commit_author: Bot Botetsky <lepetitg+bot@gmail.com>
