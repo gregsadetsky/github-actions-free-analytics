@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cd .logs
       - uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+          cache-dependency-path: '.logs'
       - run: npm install uuid
       - uses: actions/github-script@v7
         env:
@@ -27,13 +27,10 @@ jobs:
             // pushes the commit
             const fs = require('fs');
             const { v4: uuidv4 } = require('uuid');
-            const uuid = uuidv4();
-            const filename = `${uuid}.json`;
-            const path = `./${filename}`;
+            const path = `./logs/${uuidv4()}.json`;
             // write the payload to the file
             const githubContext = JSON.parse(process.env.GITHUB_CONTEXT);
             const incomingRequest = githubContext.event.inputs.incomingRequest;
-            console.log("incomingRequest", incomingRequest);
             fs.writeFileSync(path, incomingRequest);
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
