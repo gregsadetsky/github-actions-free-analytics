@@ -30,7 +30,6 @@ jobs:
             const incomingRequest = githubContext.event.inputs.incomingRequest;
             console.log("incomingRequest", incomingRequest);
             fs.writeFileSync(path, incomingRequest);
-            ```
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "[add log]"
