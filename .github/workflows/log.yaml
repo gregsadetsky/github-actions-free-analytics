@@ -7,9 +7,6 @@ on:
         description: "request payload"
 jobs:
   logjob:
-    concurrency:
-      group: logrun
-      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +31,7 @@ jobs:
       - run: |
           echo "I am protected!"
           sleep 5
-          
+
       # - uses: stefanzweifel/git-auto-commit-action@v4
       #   with:
       #     commit_message: "[add log]"
